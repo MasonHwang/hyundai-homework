@@ -9,6 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hyundai.board.domain.ImageVO;
 
+/**
+ * @author 		: 고석준
+ * @fileName 	: ImageMapperTest.java
+ * @date 		: 2022. 5. 13.
+ * @description : 
+ */
 @SpringBootTest
 public class ImageMapperTest {
 	@Autowired

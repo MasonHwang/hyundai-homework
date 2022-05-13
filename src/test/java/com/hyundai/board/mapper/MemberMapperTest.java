@@ -8,6 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.hyundai.board.domain.MemberVO;
 
+/**
+ * @author 		: 고석준
+ * @fileName 	: MemberMapperTest.java
+ * @date 		: 2022. 5. 13.
+ * @description : 
+ */
 @SpringBootTest
 public class MemberMapperTest {
 	@Autowired

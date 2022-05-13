@@ -5,20 +5,21 @@
  
 	<insert id="insertBoard" parameterType="com.hyundai.board.domain.BoardVO">
 		INSERT INTO BOARD (BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID)
-                   VALUES (SEQ_BOARD.NEXTVAL, #{btitle}, #{bcontent}, SYSDATE, #{mid}, 0, #{iid})
+                   VALUES (SEQ_BOARD.NEXTVAL, #{btitle}, #{bcontent}, SYSDATE, #{mid}, 0, #{iid, jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="selectAllBoard" resultType="com.hyundai.board.domain.BoardVO">
 		SELECT BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID
 		  FROM BOARD
-		 ORDER BY BDATE DESC;
+		 ORDER BY BDATE DESC
 	</select>
 	
 	<update id="updateBoard" parameterType="com.hyundai.board.domain.BoardVO">
 		UPDATE BOARD
 		   SET BTITLE = #{btitle},
 		       BCONTENT = #{bcontent},
-		       BDATE = SYSDATE
+		       BDATE = SYSDATE,
+		       IID = #{iid}
 		 WHERE BNO = #{bno}
 		   AND MID = #{mid}
 	</update>
