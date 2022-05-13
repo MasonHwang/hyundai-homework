@@ -24,7 +24,7 @@ public class DataSourceTests {
 		try {
 			Connection con = 
 					DriverManager.getConnection(
-							"jdbc:oracle:thin:@edudb_high?TNS_ADMIN=D:\\\\etc\\\\Wallet_edudb"
+							"jdbc:oracle:thin:@edudb_high?TNS_ADMIN=D:/etc/Wallet_edudb"
 							,"homework","Hyundaiite22");
 			System.out.println(con);
 		} catch (SQLException e) {
