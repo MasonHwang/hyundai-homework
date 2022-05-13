@@ -13,9 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-		//비밀번호 암호화 전용
-	   @Bean
-	   PasswordEncoder passwordEncoder(){
-	       return new BCryptPasswordEncoder();
-	   }
+//		//비밀번호 암호화 전용
+//	   @Bean
+//	   PasswordEncoder passwordEncoder(){
+//	       return new BCryptPasswordEncoder();
+//	   }
 }

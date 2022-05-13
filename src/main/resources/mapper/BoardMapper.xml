@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyundai.board.mapper.BoardMapper">
+ 
+	<insert id="insertBoard" parameterType="com.hyundai.board.domain.BoardVO">
+		INSERT INTO BOARD (BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID)
+                   VALUES (SEQ_BOARD.NEXTVAL, #{btitle}, #{bcontent}, SYSDATE, #{mid}, 0, #{iid})
+	</insert>
+	
+	<select id="selectAllBoard" resultType="com.hyundai.board.domain.BoardVO">
+		SELECT BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID
+		  FROM BOARD
+		 ORDER BY BDATE DESC;
+	</select>
+	
+	<update id="updateBoard" parameterType="com.hyundai.board.domain.BoardVO">
+		UPDATE BOARD
+		   SET BTITLE = #{btitle},
+		       BCONTENT = #{bcontent},
+		       BDATE = SYSDATE
+		 WHERE BNO = #{bno}
+		   AND MID = #{mid}
+	</update>
+	
+ 	<delete id="deleteBoard" parameterType="com.hyundai.board.domain.BoardVO">
+ 		DELETE BOARD
+		 WHERE BNO = #{bno}
+		   AND MID = #{mid}
+ 	</delete>
+ 	
+ 	<select id="selectBoard" resultType="com.hyundai.board.domain.BoardVO">
+ 		SELECT BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID
+		  FROM BOARD
+		 WHERE BNO = #{bno}
+ 	</select>
+</mapper>
+ 
+ 
+
+
+

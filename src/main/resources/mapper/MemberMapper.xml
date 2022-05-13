@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyundai.board.mapper.MemberMapper">
+ 
+ 	<insert id="insertMember">
+ 		INSERT INTO MEMBER(MID, MNAME, MPASSWORD, MENABLED, MROLE, MEMAIL)
+            VALUES(#{mid}, #{mname},#{mpassword}, 1,#{mrole},#{memail})
+ 	</insert>
+ 	
+ 	<select id="selectAllMember" resultType="com.hyundai.board.domain.MemberVO">
+ 		SELECT MID, MNAME, MPASSWORD, MENABLED, MROLE, MEMAIL
+		  FROM MEMBER
+ 	</select>
+ 	
+ 	<update id="updateMember">
+ 		UPDATE MEMBER
+		   SET MNAME = #{mname},
+		       MPASSWORD = #{mpassword},
+		       MENABLED = #{menabled},
+		       MROLE = #{mrole}
+		 WHERE MID = #{mid}
+		   AND MEMAIL LIKE DECODE(#{memail, jdbcType=VARCHAR}, NULL, '%', MEMAIL )
+ 	</update>
+ 	
+ 	<update id="deleteMember">
+		UPDATE MEMBER
+		   SET MENABLED = 0
+		 WHERE MID= #{mid}
+		   AND MEMAIL LIKE DECODE(#{memail, jdbcType=VARCHAR}, NULL, '%', MEMAIL )
+ 	</update>
+ 	
+ 	<select id="selectMember" resultType="com.hyundai.board.domain.MemberVO">
+ 		SELECT MID, MNAME, MPASSWORD, MENABLED, MROLE, MEMAIL
+		  FROM MEMBER
+		 WHERE MID = #{mid}
+		   AND MEMAIL LIKE DECODE(#{memail, jdbcType=VARCHAR}, NULL, '%', MEMAIL )
+ 	</select>
+ 
+</mapper>
+ 
+ 
+
+
+
