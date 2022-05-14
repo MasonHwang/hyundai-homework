@@ -4,12 +4,12 @@
 <mapper namespace="com.hyundai.board.mapper.MemberMapper">
  
  	<insert id="insertMember">
- 		INSERT INTO MEMBER(MID, MNAME, MPASSWORD, MENABLED, MROLE, MEMAIL)
-            VALUES(#{mid}, #{mname},#{mpassword}, 1,#{mrole},#{memail})
+ 		INSERT INTO MEMBER(MID, MNAME, MPASSWORD, MENABLED, MROLE, FROMSOCIAL)
+            VALUES(#{mid}, #{mname},#{mpassword}, 1,#{mrole}, #{fromsocial})
  	</insert>
  	
  	<select id="selectAllMember" resultType="com.hyundai.board.domain.MemberVO">
- 		SELECT MID, MNAME, MPASSWORD, MENABLED, MROLE, MEMAIL
+ 		SELECT MID, MNAME, MPASSWORD, MENABLED, MROLE, FROMSOCIAL
 		  FROM MEMBER
  	</select>
  	
@@ -20,21 +20,18 @@
 		       MENABLED = #{menabled},
 		       MROLE = #{mrole}
 		 WHERE MID = #{mid}
-		   AND MEMAIL LIKE DECODE(#{memail, jdbcType=VARCHAR}, NULL, '%', MEMAIL )
  	</update>
  	
  	<update id="deleteMember">
 		UPDATE MEMBER
 		   SET MENABLED = 0
 		 WHERE MID= #{mid}
-		   AND MEMAIL LIKE DECODE(#{memail, jdbcType=VARCHAR}, NULL, '%', MEMAIL )
  	</update>
  	
  	<select id="selectMember" resultType="com.hyundai.board.domain.MemberVO">
- 		SELECT MID, MNAME, MPASSWORD, MENABLED, MROLE, MEMAIL
+ 		SELECT MID, MNAME, MPASSWORD, MENABLED, MROLE, FROMSOCIAL
 		  FROM MEMBER
 		 WHERE MID = #{mid}
-		   AND MEMAIL LIKE DECODE(#{memail, jdbcType=VARCHAR}, NULL, '%', MEMAIL )
  	</select>
  
 </mapper>

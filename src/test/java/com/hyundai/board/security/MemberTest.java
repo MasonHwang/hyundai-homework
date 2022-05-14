@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.hyundai.board.domain.MemberRole;
 import com.hyundai.board.domain.MemberVO;
 import com.hyundai.board.mapper.MemberMapper;
 
@@ -23,13 +24,14 @@ public class MemberTest {
        //패스워드는 1111 로 고정
        for(int i =11; i <= 50; i++) {
            MemberVO member = new MemberVO();
-           member.setMid("user"+i);
+           member.setMid("user"+i + "@email.com");
            member.setMname("이름"+i);
            String pw = "user" + i;
            member.setMpassword(passwordEncoder.encode(pw));
-           member.setMemail("user"+i+"@email.com");
-           if(i<=40) member.setMrole("ROLE_MEMBER");
-           else member.setMrole("ROLE_ADMIN");
+           
+           member.setFromsocial(0);
+           if(i<=40) member.setMrole(MemberRole.USER);
+           else member.setMrole(MemberRole.ADMIN);
            memberMapper.insertMember(member);
        };//end int
  

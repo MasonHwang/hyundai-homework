@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.hyundai.board.domain.MemberRole;
 import com.hyundai.board.domain.MemberVO;
 
 /**
@@ -24,14 +25,14 @@ public class MemberMapperTest {
 		int rows = 0;
 		for(int i=1 ; i<=10 ; i++) {
 			MemberVO vo = new MemberVO();
-			vo.setMid("user"+i);
+			vo.setMid("user"+i + "@email.com");
 			vo.setMname("이름" +i);
 			vo.setMpassword("password" + i);
-			vo.setMemail("user" + i + "@email.com");
+			vo.setFromsocial(0);
 			if(i<9) {
-				vo.setMrole("ROLE_MEMBER");
+				vo.setMrole(MemberRole.USER);
 			}else {
-				vo.setMrole("ROLE_ADMIN");
+				vo.setMrole(MemberRole.ADMIN);
 			}
 			rows += memberMapper.insertMember(vo);
 		}
@@ -50,12 +51,11 @@ public class MemberMapperTest {
 	@Test
 	public void updateMemberTest() {
 		MemberVO updateVO = new MemberVO();
-		updateVO.setMid("TEST");
+		updateVO.setMid("TEST@email.com");
 		updateVO.setMname("TEST_UPDATE");
 		updateVO.setMpassword("TEST_update");
 		updateVO.setMenabled(0);
-		updateVO.setMrole("ROLE_TEST_update");
-		updateVO.setMemail("TEST");
+		updateVO.setMrole(MemberRole.USER);
 		
 		int rows = memberMapper.updateMember(updateVO);
 		
@@ -69,8 +69,7 @@ public class MemberMapperTest {
 		vo.setMname("TEST_UPDATE");
 		vo.setMpassword("TEST_update");
 		vo.setMenabled(0);
-		vo.setMrole("ROLE_TEST_update");
-		vo.setMemail("TEST");
+		vo.setMrole(MemberRole.USER);
 		
 		int rows = memberMapper.deleteMember(vo);
 		
@@ -80,8 +79,7 @@ public class MemberMapperTest {
 	@Test
 	public void selectMemberTest() {
 		MemberVO vo = new MemberVO();
-		vo.setMid("user1");
-		vo.setMemail("user1@email.com");
+		vo.setMid("user1@email.com");
 		
 		MemberVO result = memberMapper.selectMember(vo);
 		
