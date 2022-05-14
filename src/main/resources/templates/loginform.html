@@ -10,15 +10,15 @@
 </head>	
 <body class="text-center">
    <main class="form-signin">
-      <form action="member/loginaction" method="post">
+      <form action="/login" method="post">
          <h1 class="h3 mb-3 fw-normal">로그인 페이지</h1>
          
          <div class="form-floating">
-            <input type="text" class="form-control" id="mid" name= "mid" placeholder="아이디 입력...">
+            <input type="text" class="form-control" id="username" name= "username" placeholder="아이디 입력...">
             <label for="id">아이디</label>
          </div>
          <div class="form-floating">
-            <input type="password" class="form-control" id="mpassword" name = "mpassword" placeholder="Password">
+            <input type="password" class="form-control" id="password" name = "password" placeholder="Password">
             <label for="pwd">비밀번호</label>
          </div>
          
@@ -31,7 +31,7 @@
          <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
          
          <div style="padding:20px;"> </div> <!-- 여백 주기 -->
-         <button class="w-100 btn btn-lg btn-secondary" onclick="location.href=googlelogin">구글 로그인</button>         
+         <button class="w-100 btn btn-lg btn-secondary" onclick="location.href=/oauth2/authorization/google">구글 로그인</button>         
          
          
          

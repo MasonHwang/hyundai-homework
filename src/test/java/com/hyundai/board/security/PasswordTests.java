@@ -5,6 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * @author 		: 황명하
+ * @fileName 	: PasswordTests.java
+ * @date 		: 2022. 5. 14.
+ * @description : 
+ */
 @SpringBootTest
 public class PasswordTests {
 	@Autowired

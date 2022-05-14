@@ -44,6 +44,8 @@ public class MemberUserDetailsService implements UserDetailsService{
 		memberUserDetails.setMname(result2.getMname());
 		memberUserDetails.setFromsocial(result2.getFromsocial());
 		
+	
+		
 		return memberUserDetails;
 		
 	}
