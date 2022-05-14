@@ -8,6 +8,11 @@
 <script src="js/bootstrap.bundle.min.js"></script>
 
 </head>	
+<script>
+function moveOAuth(){
+	location.href = "/oauth2/authorization/google";
+}
+</script>
 <body class="text-center">
    <main class="form-signin">
       <form action="/login" method="post">
@@ -21,17 +26,11 @@
             <input type="password" class="form-control" id="password" name = "password" placeholder="Password">
             <label for="pwd">비밀번호</label>
          </div>
-         
-         <div class="checkbox mb-3">
-            <label>
-               <input type="checkbox" value="remember-me"> 아이디 저장
-            </label>
-         </div>
          <div></div>
          <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
          
          <div style="padding:20px;"> </div> <!-- 여백 주기 -->
-         <button class="w-100 btn btn-lg btn-secondary" onclick="location.href=/oauth2/authorization/google">구글 로그인</button>         
+         <a class="w-100 btn btn-lg btn-secondary" href="/oauth2/authorization/google">구글 로그인</a>         
          
          
          

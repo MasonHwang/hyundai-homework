@@ -45,22 +45,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.authorizeHttpRequests()
-			.antMatchers("/sample/all").permitAll()
-			.antMatchers("/sample/member").hasRole("USER");
+			.antMatchers("/board/*").permitAll()
+			.antMatchers("/board/*").hasAnyRole("USER","ADMIN");
 		
 		
-		http.formLogin();
+		http.formLogin().loginPage("/member/login").loginProcessingUrl("/login").defaultSuccessUrl("/board/list");
 		
 		http.csrf().disable();
 		
 		http.logout();
 		
-		http.oauth2Login();
+		http.oauth2Login().loginPage("/member/login").defaultSuccessUrl("/");
 		
         //일반 from 로그인 rememberMe 설정
-        http.rememberMe()  //7day
-        .tokenValiditySeconds( 60 * 60 * 24 * 7)
-        .userDetailsService(userDetailsService());     
+//        http.rememberMe()  //7day
+//        .tokenValiditySeconds( 60 * 60 * 24 * 7)
+//        .userDetailsService(userDetailsService());     
 
 		
 	}
