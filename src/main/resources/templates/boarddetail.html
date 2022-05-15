@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th=http://www.thymeleaf.org
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+</head>
+<body>
+	<div align="center" class="container-fluid">
+		<h1 class="h3 mb-2 text-center">게시판</h1>
+		<div class="card shadow mb-4" style=" height: auto; width: 1000px; ">
+		    <div class="card-header py-3">
+            	<h6 class="m-0 font-weight-bold text-primary">게시글 내용</h6>
+        	</div>
+        	<div class="card-body">
+		            <div class="table-responsive">
+					<table class="table table-bordered" >
+						<tr>
+							<td>글번호</td>
+							<td th:text="${board.bno}" />
+							<td>작성자</td>
+							<td th:text="${board.mid}" />
+						</tr>
+						<tr>
+							<td>작성일</td>
+							<td
+								th:text="${#calendars.format(board.bdate, 'yyyy-MM-dd HH:mm:ss')}" />
+							<td>조회수</td>
+							<td th:text="${board.bhitcount}" />
+						</tr>
+					</table>
+					<table class="table table-bordered" >
+						<tr>
+							<td style="width:50pt;">제목</td>
+							<td th:text="${board.btitle}" />						
+						</tr>
+						<tr>
+							<td>내용</td>
+							<td th:text="${board.bcontent}" />
+						</tr>
+						<tr>
+						</tr>
+					</table>
+				</div>
+				
+				<a th:href="@{update(no=${board.bno})}" th:text="수정" /> 
+				<a th:href="@{delete(no=${board.bno})}" th:text="삭제" /> 
+				<a th:href="@{list}" th:text="리스트" />
+			</div>
+		</div>
+	</div>
+	<br />
+
+</body>
+</html>

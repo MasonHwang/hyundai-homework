@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="ko" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title>게시물</title>
+</head>
+<body>
+<form method="post">
+<table>
+<caption>게시물 쓰기</caption>
+<tr>
+	<th>제목</th>
+	<td><input type="text" name="btitle" autofocus="autofocus" 
+		required="required"/></td>
+</tr>
+<tr>
+	<th>작성자</th>
+	<td><input type="text" name="mid" required="required" th:value="${#authentication.name}" readOnly></td>
+</tr>
+<tr>
+	<th>내용</th>
+	<td><textarea name="bcontent" rows="5" cols="40" 
+		required="required"></textarea></td>
+</tr>
+<tr>
+	<td colspan="2" align="center"><input type="submit" value="완료" /></td>
+</tr>
+</table>
+</form>
+</body>
+</html>

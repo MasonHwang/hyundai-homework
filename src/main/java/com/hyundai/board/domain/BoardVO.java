@@ -1,5 +1,6 @@
 package com.hyundai.board.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import lombok.Data;
@@ -11,7 +12,7 @@ import lombok.Data;
  * @description : 
  */
 @Data
-public class BoardVO {
+public class BoardVO implements Serializable{
 	private int bno;//pk
 	private String btitle;
 	private String bcontent;

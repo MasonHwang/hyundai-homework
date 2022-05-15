@@ -1,6 +1,8 @@
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"
+ xmlns:th=http://www.thymeleaf.org
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
@@ -26,24 +28,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>100</td>
-                            <td>너희 그거 앎?</td>
-                            <td>2022-05-14 02:02:02</td>
-                            <td>user04</td>
-                            <td>13353</td>
-                        </tr>
-                        <tr>
-                            <td>101</td>
-                            <td>내 제목 겁나 김 ㅋㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅋㄹㅃㅃ</td>
-                            <td>2022-05-14 02:03:02</td>
-                            <td>user05</td>
-                            <td>133522</td>
-                        </tr>
+                         <tr th:if="${not #lists.isEmpty(list)}" th:each="vo : ${list}">
+                         	<td th:text="${vo.bno}" />
+                         	<td><a th:href="@{detail(no=${vo.bno})}" th:text="${vo.btitle}"></a></td>
+                         	<td th:text="${#calendars.format(vo.bdate, 'yy-MM-dd HH:mm')}" />
+                         	<td th:text="${vo.mid}" />
+                         	<td th:text="${vo.bhitcount}" />
+                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+    </div>
+    <div style="width:100px;">
+    	<button class="w-100 btn btn-lg btn-primary"  onClick="location.href='/board/insert'">글쓰기</button>
     </div>
 </div>
 </body>
