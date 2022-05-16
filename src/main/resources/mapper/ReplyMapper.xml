@@ -20,6 +20,7 @@
 	       SET RCONTENT = #{rcontent}
 	     WHERE BNO = #{bno}
 	       AND MID = #{mid}
+	       AND RNO = #{rno}
 	</update>
 	
 	<delete id="deleteReply">

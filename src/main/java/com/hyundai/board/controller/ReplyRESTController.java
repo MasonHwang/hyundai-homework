@@ -63,4 +63,19 @@ public class ReplyRESTController {
 		return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 	}
 	
+	@PostMapping("/update")
+	public ResponseEntity<String> updateReply(@RequestBody ReplyVO replyVO,
+			@AuthenticationPrincipal MemberUserDetails memberUserDetails){
+		replyVO.setMid(memberUserDetails.getMemail());
+		System.out.println(replyVO);
+		int rows = replyService.updateReply(replyVO);
+		if(rows != 1) {
+			System.out.println("reply update error !!!!!!!1");
+			return new ResponseEntity<>("FAILURE", HttpStatus.BAD_GATEWAY);
+		}
+		System.out.println("reply update success !!!!!!!1");
+		return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+	}
+
+	
 }
