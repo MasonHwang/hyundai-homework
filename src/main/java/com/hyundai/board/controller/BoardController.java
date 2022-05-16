@@ -66,4 +66,49 @@ public class BoardController {
 			return "result";
 		}
 	}
+	
+	@RequestMapping(value="/delete", method=RequestMethod.GET)
+	public String deleteBoard(@RequestParam int no, @RequestParam String id) {
+		try {
+			BoardVO vo = new BoardVO();
+			vo.setBno(no);
+			vo.setMid(id);
+			int result = boardService.deleteBoard(vo);
+			return "redirect:list";
+		}catch(Exception e) {
+			throw e;
+		}
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String update(@RequestParam int no, @RequestParam String id, Model model) {
+		try {
+			BoardVO vo = new BoardVO();
+			vo.setBno(no);
+			BoardVO boardVO = boardService.selectBoard(vo);
+			// 해당 유저가 글 작성자가 같지 않다면 접근 못하도록 설정
+			if(!boardVO.getMid().equals(id)) return "/board/list";
+			model.addAttribute("board", boardVO);
+			System.out.println(boardVO);
+			return "updateform";	
+		}catch(Exception e) {
+			throw e;
+		}
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String update(@RequestParam int bno, BoardVO boardVO, Model model) {
+		System.out.println("수정 시작");
+		try {
+			
+			boardVO.setBno(bno);
+			int result = boardService.updateBoard(boardVO);
+			return "redirect:list";
+		}catch(Exception e) {
+			throw e;
+		}
+	}
+	
+	
+	
 }

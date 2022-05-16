@@ -44,8 +44,8 @@
 					</table>
 				</div>
 				
-				<a th:href="@{update(no=${board.bno})}" th:text="수정" /> 
-				<a th:href="@{delete(no=${board.bno})}" th:text="삭제" /> 
+				<a th:href="@{update(no=${board.bno}, id=${#authentication.name})}" th:text="수정" /> 
+				<a th:href="@{delete(no=${board.bno}, id=${#authentication.name})}" th:text="삭제" /> 
 				<a th:href="@{list}" th:text="리스트" />
 			</div>
 		</div>

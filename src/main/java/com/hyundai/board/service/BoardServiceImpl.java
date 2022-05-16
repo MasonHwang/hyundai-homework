@@ -10,6 +10,22 @@ import com.hyundai.board.mapper.BoardMapper;
 
 @Service
 public class BoardServiceImpl implements BoardService {
+	@Override
+	public int updateBoard(BoardVO boardVO) {
+		try {
+			int result = boardMapper.updateBoard(boardVO);
+			System.out.println("수정 결과: " + result);
+			if(result != 1) {
+				throw new RuntimeException("수정이 성공적으로 이뤄지지 않았습니다.");
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			throw e;
+		}
+		return 1;
+	}
+
+
 	@Autowired
 	private BoardMapper boardMapper;
 	
@@ -33,6 +49,24 @@ public class BoardServiceImpl implements BoardService {
 			System.out.println(e.getMessage());
 			throw e;
 		}
+	}
+
+
+	@Override
+	public int deleteBoard(BoardVO boardVO) {
+		// TODO Auto-generated method stub
+		
+		try {
+			int result = boardMapper.deleteBoard(boardVO);
+			System.out.println("삭제 결과: " + result);
+			if(result != 1) {
+				throw new RuntimeException("삭제가 성공적으로 이뤄지지 않았습니다.");
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			throw e;
+		}
+		return 1;
 	}
 
 

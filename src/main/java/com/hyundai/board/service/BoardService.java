@@ -6,9 +6,15 @@ import com.hyundai.board.domain.BoardVO;
 
 public interface BoardService {
 	
+	
+	
 	void insertBoard(BoardVO boardVO);
 	
 	List<BoardVO> selectAllBoard();
 	
 	BoardVO selectBoard(BoardVO boardVO);
+	
+	int deleteBoard(BoardVO boardVO);
+	
+	int updateBoard(BoardVO boardVO);
 }
