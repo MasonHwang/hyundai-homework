@@ -14,7 +14,7 @@ import lombok.Setter;
  * @author 		: 고석준
  * @fileName 	: MemberUserDetails.java
  * @date 		: 2022. 5. 14.
- * @description : 
+ * @description : Spring Security에서 사용자의 정보를 담는 인터페이스
  */
 @Setter
 @Getter

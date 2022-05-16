@@ -13,7 +13,7 @@ import com.hyundai.board.mapper.ReplyMapper;
  * @author 		: 고석준
  * @fileName 	: ReplyServiceImpl.java
  * @date 		: 2022. 5. 16.
- * @description : 
+ * @description : 댓글 기능 관련 서비스
  */
 @Service
 public class ReplyServiceImpl implements ReplyService {

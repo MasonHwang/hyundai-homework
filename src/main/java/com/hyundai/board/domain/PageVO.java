@@ -4,6 +4,12 @@ import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
+/**
+ * @author 		: 황명하
+ * @fileName 	: PageVO.java
+ * @date 		: 2022. 5. 16.
+ * @description : 게시판 페이징을 실제 담당하는 클래스
+ */
 @Component
 @Data
 public class PageVO {

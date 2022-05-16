@@ -9,7 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.hyundai.board.domain.BoardVO;
 import com.hyundai.board.domain.Criteria;
 import com.hyundai.board.mapper.BoardMapper;
-
+/**
+ * @author 		: 고석준, 황명하
+ * @fileName 	: BoardServiceImpl.java
+ * @date 		: 2022. 5. 16.
+ * @description : 게시판 기능 관련 서비스
+ */
 @Service
 public class BoardServiceImpl implements BoardService {
 	@Override

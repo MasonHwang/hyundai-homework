@@ -21,6 +21,12 @@ import com.hyundai.board.domain.MemberUserDetails;
 import com.hyundai.board.domain.MemberVO;
 import com.hyundai.board.mapper.MemberMapper;
 
+/**
+ * @author 		: 고석준, 황명하 (Pair Programming)
+ * @fileName 	: MemberOAuth2UserDetailsService.java
+ * @date 		: 2022. 5. 14.
+ * @description : OAuth2를 이용한 시큐리티 소셜 로그인 처리 관련 서비스
+ */
 @Log4j2
 @Service
 public class MemberOAuth2UserDetailsService

@@ -5,6 +5,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.Data;
 
+/**
+ * @author 		: 황명하
+ * @fileName 	: Criteria.java
+ * @date 		: 2022. 5. 16.
+ * @description : 특정 페이지의 게시판을 조회하기 위한 클래스, 검색을 위한 기준데이터
+ */
+
 @Component
 @Data
 public class Criteria {

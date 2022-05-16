@@ -9,7 +9,7 @@ import lombok.Data;
  * @author 		: 고석준
  * @fileName 	: BoardVO.java
  * @date 		: 2022. 5. 13.
- * @description : 
+ * @description : 게시판 VO
  */
 @Data
 public class BoardVO implements Serializable{

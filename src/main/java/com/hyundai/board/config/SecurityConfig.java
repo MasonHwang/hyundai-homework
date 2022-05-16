@@ -10,7 +10,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+/**
+ * @author 		: 고석준, 황명하 (Pair Programming)
+ * @fileName 	: SecurityConfig.java
+ * @date 		: 2022. 5. 14.
+ * @description : 스프링 시큐리티 설정
+ */
 @Configuration
 @Log4j2
 

@@ -101,15 +101,15 @@
 		    		<div class="font-weight-bold text-primary col-6">게시글 내용</div>
 		    		
 		    		<div class="col-1" >
-		    			<a th:if="${board.mid == #authentication.name}"
+		    			<a class="btn btn-success" th:if="${board.mid == #authentication.name}"
 		    			   th:href="@{update(no=${board.bno}, id=${#authentication.name})}" th:text="수정" /> 
 		    		</div>
 		    		<div class="col-1" >
-		    			<a th:if="${board.mid == #authentication.name}"
+		    			<a class="btn btn-danger" th:if="${board.mid == #authentication.name}"
 		    			   th:href="@{delete(no=${board.bno}, id=${#authentication.name})}" th:text="삭제" />
 		    		</div>
-		    		<div class="col-1">
-		    			<a th:href="@{list}" th:text="리스트" />
+		    		<div class="col-md-1">
+		    			<a class="btn btn-primary" th:href="@{list}" th:text="목록" />
 		    		</div>
 		    	</div>
             	
@@ -171,8 +171,8 @@
 						<td style="display:none;" th:id="'rcontentupdate' + ${reply.rno}"><input type="text" style="width:90%" th:value="${reply.rcontent}" th:id="'rcontentinput'+${reply.rno}"></input><input type="button" value="수정" th:onclick="'updateReply('+ ${reply.rno} +')'"></input></td> 
 						<td th:text="${reply.mid}" class="replylist"> </td>
 						<td th:text="${#calendars.format(reply.rdate, 'MM-dd')}" class="replylist"></td>
-						<td th:if="${#authentication.name == reply.mid}"><input type="button" class="btn btn-danger" th:onclick="'toggleReply('+ ${reply.rno} +')'" value="수정"></input></td>
-						<td th:unless="${#authentication.name == reply.mid}"><input type="hidden" class="btn btn-danger" th:onclick="'toggleReply('+ ${reply.rno} +')'" value="수정"></input></td>
+						<td th:if="${#authentication.name == reply.mid}"><input type="button" class="btn btn-success" th:onclick="'toggleReply('+ ${reply.rno} +')'" value="수정"></input></td>
+						<td th:unless="${#authentication.name == reply.mid}"><input type="hidden" class="btn btn-success" th:onclick="'toggleReply('+ ${reply.rno} +')'" value="수정"></input></td>
 						<td th:if="${#authentication.name == reply.mid}"><input type="button" class="btn btn-danger" th:onclick="'deleteReply('+ ${reply.rno} +')'" value="삭제"></input></td>
 						<td th:unless="${#authentication.name == reply.mid}"><input type="hidden" class="btn btn-danger" th:onclick="'deleteReply('+ ${reply.rno} +')'" value="삭제"></input></td>
 					</tr>

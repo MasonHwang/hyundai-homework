@@ -8,7 +8,7 @@ import lombok.Data;
  * @author 		: 고석준
  * @fileName 	: MemberVO.java
  * @date 		: 2022. 5. 13.
- * @description : 
+ * @description : 멤버 VO
  */
 @Data
 public class MemberVO implements Serializable{

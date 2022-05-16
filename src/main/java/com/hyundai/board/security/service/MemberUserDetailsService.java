@@ -15,6 +15,12 @@ import com.hyundai.board.domain.MemberUserDetails;
 import com.hyundai.board.domain.MemberVO;
 import com.hyundai.board.mapper.MemberMapper;
 
+/**
+ * @author 		: 고석준, 황명하 (Pair Programming)
+ * @fileName 	: MemberUserDetailsService.java
+ * @date 		: 2022. 5. 14.
+ * @description : 스프링 시큐리티를 이용한 로그인 처리 관련 서비스
+ */
 @Service
 public class MemberUserDetailsService implements UserDetailsService{
 	@Autowired

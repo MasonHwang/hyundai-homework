@@ -6,7 +6,7 @@ import lombok.Data;
  * @author 		: 고석준
  * @fileName 	: ImageVO.java
  * @date 		: 2022. 5. 13.
- * @description : 
+ * @description : 이미지 VO
  */
 @Data
 public class ImageVO {

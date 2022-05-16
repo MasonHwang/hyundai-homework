@@ -21,7 +21,7 @@ import com.hyundai.board.service.ReplyService;
  * @author 		: 고석준
  * @fileName 	: ReplyRESTController.java
  * @date 		: 2022. 5. 16.
- * @description : 
+ * @description : 관련 관련 기능(생성, 삭제 수정)에 대한 컨트롤러
  */
 
 @RestController

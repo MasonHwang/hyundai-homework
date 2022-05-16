@@ -9,7 +9,7 @@ import com.hyundai.board.domain.ReplyVO;
  * @author 		: 고석준
  * @fileName 	: ReplyService.java
  * @date 		: 2022. 5. 16.
- * @description : 
+ * @description : 댓글 기능 관련 서비스 
  */
 public interface ReplyService {
 	//CRUD

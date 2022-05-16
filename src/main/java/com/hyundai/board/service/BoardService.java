@@ -5,9 +5,13 @@ import java.util.List;
 import com.hyundai.board.domain.BoardVO;
 import com.hyundai.board.domain.Criteria;
 
+/**
+ * @author 		: 고석준, 황명하
+ * @fileName 	: BoardService.java
+ * @date 		: 2022. 5. 16.
+ * @description : 게시판 기능 관련 서비스
+ */
 public interface BoardService {
-	
-	
 	
 	void insertBoard(BoardVO boardVO);
 	

@@ -19,6 +19,12 @@ import com.hyundai.board.domain.PageVO;
 import com.hyundai.board.service.BoardService;
 import com.hyundai.board.service.ReplyService;
 
+/**
+ * @author 		: 황명하, 고석준
+ * @fileName 	: BoardController.java
+ * @date 		: 2022. 5. 16.
+ * @description : 게시판 기능(조회, 삽입, 삭제, 변경) 관련 컨트롤러
+ */
 @Controller
 @RequestMapping(value="board/*")
 public class BoardController {
@@ -29,6 +35,7 @@ public class BoardController {
 	@Autowired
 	private ReplyService replyService;
 	
+	// 페이징이 적용된 게시글 리스트 화면 출력 (황명하)
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String boardlist(Criteria criteria, Model model)throws Exception {
 		try {
@@ -39,12 +46,12 @@ public class BoardController {
 			throw e;
 		}
 	}
-	
+	// 게시글 작성 폼 화면으로 이동 (황명하)
 	@RequestMapping(value="/insert", method = RequestMethod.GET)
 	public String insertBoard() {
 		return "insertboard";
 	}
-	
+	// 입력된 게시글 작성폼을 이용해 DB에 Insert (황명하)
 	@RequestMapping(value="/insert", method = RequestMethod.POST)
 	public String insertBoard(@ModelAttribute BoardVO boardVO, Model model) {
 		try {
@@ -57,6 +64,7 @@ public class BoardController {
 		}
 	}
 	
+	// 게시글 상세보기 기능 구현 (고석준, 황명하)
 	@RequestMapping(value="/detail", method = RequestMethod.GET)
 	public String boardDetail(@RequestParam(defaultValue = "0") int no ,
 			@AuthenticationPrincipal MemberUserDetails memberUserDetails,
@@ -81,6 +89,7 @@ public class BoardController {
 		}
 	}
 	
+	// 게시글 삭제 수행(황명하)
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String deleteBoard(@RequestParam int no, @RequestParam String id) {
 		try {
@@ -94,6 +103,7 @@ public class BoardController {
 		}
 	}
 	
+	//게시글 수정 폼으로 이동 (황명하)
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(@RequestParam int no, @RequestParam String id, Model model) {
 		try {
@@ -110,12 +120,11 @@ public class BoardController {
 		}
 	}
 	
+	// 입력된 게시글 수정폼을 이용해 수정 실행 (황명하)
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(BoardVO boardVO, Model model) {
 		System.out.println("수정 시작");
 		try {
-			
-			//boardVO.setBno(bno);
 			int result = boardService.updateBoard(boardVO);
 			return "redirect:list";
 		}catch(Exception e) {

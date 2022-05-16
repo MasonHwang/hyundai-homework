@@ -13,6 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hyundai.board.domain.BoardVO;
 import com.hyundai.board.service.BoardService;
 
+
+/**
+ * @author 		: 뢍명하
+ * @fileName 	: BoardRESTController.java
+ * @date 		: 2022. 5. 16.
+ * @description : REST 적용한 게시글 조회 기능 관련 컨트롤러
+ */
+
 @RestController
 @RequestMapping(value="board/*")
 public class BoardRESTController {
