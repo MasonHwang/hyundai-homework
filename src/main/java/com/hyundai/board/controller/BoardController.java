@@ -97,11 +97,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(@RequestParam int bno, BoardVO boardVO, Model model) {
+	public String update(BoardVO boardVO, Model model) {
 		System.out.println("수정 시작");
 		try {
 			
-			boardVO.setBno(bno);
+			//boardVO.setBno(bno);
 			int result = boardService.updateBoard(boardVO);
 			return "redirect:list";
 		}catch(Exception e) {

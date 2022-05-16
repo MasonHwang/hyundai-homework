@@ -16,9 +16,9 @@
         	<div class="card-body">
 		            <div class="table-responsive">
 		            <form action="update" method="POST">
-		            	<input type="hidden" name="no" th:value="${board.bno}"/>
+		            	<input type="hidden" name="bno" th:value="${board.bno}"/>
 		            	<input type="hidden" name="mid" th:value="${board.mid}"/>
-		            	<input type="hidden" name="lid" th:value="${board.iid}"/>
+		            	<input type="hidden" name="iid" th:value="${board.iid}"/>
 						<table class="table table-bordered" >
 							<tr>
 								<td style="width:50pt;">제목</td>
@@ -29,6 +29,7 @@
 								<td><textarea name="bcontent"  autofocus="autofocus" required="required" style="width:600px;height:550px;font-size:15px;">[[${board.bcontent}]]</textarea></td>
 							</tr>
 						</table>
+						<button class = "btn btn-lg btn-danger" onCLick="location.href='/board/list'">작성 취소</button>
 						<button type="submit" class = "btn btn-lg btn-primary">수정하기</button>
 					</form>
 				</div>
