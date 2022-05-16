@@ -17,4 +17,6 @@ public interface BoardService {
 	int deleteBoard(BoardVO boardVO);
 	
 	int updateBoard(BoardVO boardVO);
+	
+	List<BoardVO> selectMemberBoard(BoardVO boardVO);
 }

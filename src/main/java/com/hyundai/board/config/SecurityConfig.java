@@ -34,26 +34,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 	*/
    
+   /*
    @Bean
    public RoleHierarchyImpl roleHierarchyImpl() {
        RoleHierarchyImpl roleHierarchyImpl = new RoleHierarchyImpl();
        roleHierarchyImpl.setHierarchy("ROLE_ADMIN > ROLE_USER");
 	   return roleHierarchyImpl;
    }
+   */
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.authorizeHttpRequests()
 			.antMatchers("/board/*").permitAll()
-			.antMatchers("/board/*").hasAnyRole("USER","ADMIN");
+			.antMatchers("/member/login").permitAll()
+			.antMatchers("/member/*").hasAnyRole("USER","ADMIN");
 		
 		
 		http.formLogin().loginPage("/member/login").loginProcessingUrl("/login").defaultSuccessUrl("/board/list");
 		
 		http.csrf().disable();
 		
-		http.logout();
+		http.logout().logoutSuccessUrl("/board/list");
 		
 		http.oauth2Login().loginPage("/member/login").defaultSuccessUrl("/");
 		

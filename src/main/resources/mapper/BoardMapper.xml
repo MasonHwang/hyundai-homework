@@ -35,6 +35,14 @@
 		  FROM BOARD
 		 WHERE BNO = #{bno}
  	</select>
+ 	
+ 	<!--  고석준 추가  -->
+ 	<select id="selectMemberBoard" resultType="com.hyundai.board.domain.BoardVO">
+ 		SELECT BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID
+		  FROM BOARD
+		 WHERE MID = #{mid}
+		 ORDER BY BDATE DESC
+ 	</select>
 </mapper>
  
  

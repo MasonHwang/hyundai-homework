@@ -80,6 +80,13 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 	}
+
+
+	@Override
+	public List<BoardVO> selectMemberBoard(BoardVO boardVO) {
+		// TODO Auto-generated method stub
+		return boardMapper.selectMemberBoard(boardVO);
+	}
 	
 	
 	

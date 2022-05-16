@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="ko"
+ xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>게시판</title>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+</head>
+<body>	
+<div th:replace="~{includes/header :: header}"></div>
+<div align="center" class="container-fluid">
+    <h1 class="h3 mb-2 text-center">마이페이지</h1>
+    <div class="card shadow mb-4" style=" height: auto; width: 1000px; ">	
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">내 정보</h6>
+        </div>
+        <div class="card-body">
+            <div class="row">
+            	<div class="col-4">아이디  </div>
+            	<div class="col-8" th:text="${username}">  </div>
+            </div>
+            <div class="row">
+            	<div class="col-4">이름 </div>
+            	<div class="col-8" sec:authentication="name"> </div>
+            </div>
+            <div class="row">
+            	<div class="col-4">권한 </div>
+            	<div class="col-8">
+            		<div sec:authorize="hasRole('ROLE_USER')">사용자 </div>
+            		<div sec:authorize="hasRole('ROLE_ADMIN')">관리자 </div>
+ 
+            	</div>
+            </div>
+        </div>
+    </div>
+    <div class="card shadow mb-4" style=" height: auto; width: 1000px; ">
+		    
+        	<div class="card-body">
+		            <div class="table-responsive">
+					<table class="table table-bordered" >
+						<tr>
+							<th>글번호</th>
+							<th>제목</th>
+							<th>작성일자</th>
+							<th>조회수</th>
+						</tr>
+						<tr th:if="${#lists.isEmpty(boardlist)}">
+							<td colspan="4" align="center">작성된 글이 없습니다. </td>
+						</tr>
+						<tr th:unless="${#lists.isEmpty(boardlist)}" th:each="board: ${boardlist}">
+							<td th:text="${board.bno}" />
+							<td><a th:href="@{/board/detail(no=${board.bno})}" th:text="${board.btitle}"></a></td>	
+							<td th:text="${#calendars.format(board.bdate, 'yyyy-MM-dd')}" />
+							<td th:text="${board.bhitcount}" />
+						</tr>
+					</table>
+				</div>
+				
+			</div>
+		</div>
+</div>
+</body>
+</html>

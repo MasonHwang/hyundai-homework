@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.hyundai.board.domain.BoardVO;
+import com.hyundai.board.domain.MemberVO;
 
 /**
  * @author 		: 고석준
@@ -21,4 +22,6 @@ public interface BoardMapper {
 	public int deleteBoard(BoardVO boardVO);
 	
 	public BoardVO selectBoard(BoardVO boardVO);
+	
+	public List<BoardVO> selectMemberBoard(BoardVO boardVO);
 }

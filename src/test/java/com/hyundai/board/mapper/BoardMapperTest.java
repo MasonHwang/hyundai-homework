@@ -1,5 +1,6 @@
 package com.hyundai.board.mapper;
 
+import java.awt.datatransfer.SystemFlavorMap;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -95,6 +96,17 @@ public class BoardMapperTest {
 		
 		BoardVO boardVO = boardMapper.selectBoard(vo);
 		System.out.println(boardVO);
+	}
+	
+	@Test
+	public void selectMemberBoardTest() {
+		BoardVO boardVO = new BoardVO();
+		boardVO.setMid("user11@email.com");
+		
+		List<BoardVO> list = boardMapper.selectMemberBoard(boardVO);
+		for(BoardVO vo : list) {
+			System.out.println(vo);
+		}
 	}
 	
 }
