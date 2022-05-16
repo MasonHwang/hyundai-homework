@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hyundai.board.domain.BoardVO;
 import com.hyundai.board.domain.Criteria;
@@ -42,9 +43,11 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	@Override
+	@Transactional
 	public BoardVO selectBoard(BoardVO boardVO) {
 		try {
 			boardVO = boardMapper.selectBoard(boardVO);
+			boardMapper.increaseHitcount(boardVO);
 			return boardVO;
 		}catch(Exception e) {
 			System.out.println(e.getMessage());

@@ -32,5 +32,6 @@ public interface BoardMapper {
 	public List<BoardVO> getMemberBoard(@Param("cri")Criteria cri, @Param("mid")String mid);
 	public int getTotal();
 	public int getMemberTotal(String mid);
+	public void increaseHitcount(BoardVO boardVO);
 	
 }

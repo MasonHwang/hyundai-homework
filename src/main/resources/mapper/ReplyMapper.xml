@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyundai.board.mapper.ReplyMapper">
+ 
+	<insert id="insertReply">
+		INSERT INTO REPLY(RNO, RCONTENT, RDATE, BNO, MID)
+                   VALUES(SEQ_REPLY.NEXTVAL, #{rcontent}, SYSDATE, #{bno}, #{mid})
+	</insert>
+	
+	<select id="selectReply" resultType="com.hyundai.board.domain.ReplyVO">
+		SELECT RNO, RCONTENT, RDATE, BNO, MID
+		  FROM REPLY
+		 WHERE BNO = #{bno}
+		 ORDER BY RDATE
+	</select>
+	
+	<update id="updateReply">
+		UPDATE REPLY
+	       SET RCONTENT = #{rcontent}
+	     WHERE BNO = #{bno}
+	       AND MID = #{mid}
+	</update>
+	
+	<delete id="deleteReply">
+		DELETE REPLY
+		 WHERE RNO = #{rno}
+	       AND MID = #{mid}
+	       AND BNO = #{bno}
+	</delete>
+</mapper>
+ 
+ 
+
+
+

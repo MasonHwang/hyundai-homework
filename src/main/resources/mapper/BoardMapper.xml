@@ -86,6 +86,12 @@
 		  WHERE MID = #{mid}
  	</select> 	
  	
+ 	<update id="increaseHitcount">
+ 		UPDATE BOARD
+ 		   SET BHITCOUNT = BHITCOUNT + 1
+ 		 WHERE BNO = #{bno}
+ 	
+ 	</update>
  	
 </mapper>
  

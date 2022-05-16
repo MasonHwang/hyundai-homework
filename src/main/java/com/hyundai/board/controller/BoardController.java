@@ -2,9 +2,8 @@ package com.hyundai.board.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hyundai.board.domain.BoardVO;
+import com.hyundai.board.domain.MemberUserDetails;
+import com.hyundai.board.domain.ReplyVO;
 import com.hyundai.board.domain.Criteria;
 import com.hyundai.board.domain.PageVO;
 import com.hyundai.board.service.BoardService;
+import com.hyundai.board.service.ReplyService;
 
 @Controller
 @RequestMapping(value="board/*")
@@ -24,16 +26,8 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-//	@RequestMapping(value="/list", method = RequestMethod.GET)
-//	public String boardlist(Model model)throws Exception {
-//		try {
-//			List<BoardVO> list = boardService.selectAllBoard();
-//			model.addAttribute("list", list);
-//			return "boardlist";
-//		}catch(Exception e) {
-//			throw e;
-//		}
-//	}
+	@Autowired
+	private ReplyService replyService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String boardlist(Criteria criteria, Model model)throws Exception {
@@ -64,7 +58,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/detail", method = RequestMethod.GET)
-	public String boardDetail(@RequestParam(defaultValue = "0") int no ,Model model) {
+	public String boardDetail(@RequestParam(defaultValue = "0") int no ,
+			@AuthenticationPrincipal MemberUserDetails memberUserDetails,
+			Model model) {
 		try {
 			
 			BoardVO vo = new BoardVO();
@@ -72,10 +68,15 @@ public class BoardController {
 			BoardVO boardVO = boardService.selectBoard(vo);
 			model.addAttribute("board", boardVO);
 			System.out.println(boardVO);
+			
+			List<ReplyVO> replylist = replyService.selectReply(vo);
+			model.addAttribute("replylist", replylist);
+			
 			return "boarddetail";
 		}catch(Exception e) {
 			model.addAttribute("msg", "접근할 수 없는 게시물이거나 시스템 오류입니다.");
 			model.addAttribute("url", "board/list");
+			e.printStackTrace();
 			return "result";
 		}
 	}

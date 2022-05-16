@@ -6,19 +6,94 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+	function insertReply(){
+		
+		var bno = $('#bno').text();
+		var rcontent = $('#replyInput').val();
+		var replyVO = {
+				'bno' : bno,
+				'rcontent' : rcontent
+			};
+		var json = JSON.stringify(replyVO);
+		$.ajax({
+			url: '/reply/insert',
+			type: 'POST',
+			contentType : 'application/json',
+			data: json,
+			success : function(data){
+				alert('댓글 작성 완료');
+				console.log(data);
+				$('.replylist').remove();
+				/*
+				for(var reply of data){
+					$('.reply').append('<tr class="replylistp"><td class="replylist">'+ reply.rno +'</td>'+
+											'<td class="replylist">'+ reply.rcontent +'</td>'+
+											'<td class="replylist">'+ reply.mid +'</td>'+
+											'<td class="replylist">'+ reply.rdate +'<button type="hidden" class="btn btn-danger" onclick="deleteReply('+reply.rno+')"></button></td></tr>');
+				}
+				*/
+				location.reload();
+			},
+			error : function(){
+				alert('댓글 작성 실패');
+			}
+		});
+	}
+	
+	function deleteReply(rno){
+		var replyVO = {
+				'rno' : rno,
+				'bno' : $('#bno').text()
+		}
+		var json = JSON.stringify(replyVO);
+		$.ajax({
+			url: '/reply/delete',
+			type: 'POST',
+			contentType : 'application/json',
+			data: json,
+			success: function(){
+				alert('삭제 성공 ');
+				location.reload();
+			},
+			error: function(){
+				alert('삭제 실패')
+			}
+		});
+	}
+	
+</script>
 <body>
+	<div th:replace="~{includes/header :: header}"></div>
 	<div align="center" class="container-fluid">
 		<h1 class="h3 mb-2 text-center">게시판</h1>
 		<div class="card shadow mb-4" style=" height: auto; width: 1000px; ">
 		    <div class="card-header py-3">
-            	<h6 class="m-0 font-weight-bold text-primary">게시글 내용</h6>
+		    	<div class="row">
+		    		<div class="col-3"></div>
+		    		<div class="font-weight-bold text-primary col-6">게시글 내용</div>
+		    		
+		    		<div class="col-1" >
+		    			<a th:if="${board.mid == #authentication.name}"
+		    			   th:href="@{update(no=${board.bno}, id=${#authentication.name})}" th:text="수정" /> 
+		    		</div>
+		    		<div class="col-1" >
+		    			<a th:if="${board.mid == #authentication.name}"
+		    			   th:href="@{delete(no=${board.bno}, id=${#authentication.name})}" th:text="삭제" />
+		    		</div>
+		    		<div class="col-1">
+		    			<a th:href="@{list}" th:text="리스트" />
+		    		</div>
+		    	</div>
+            	
         	</div>
         	<div class="card-body">
 		            <div class="table-responsive">
 					<table class="table table-bordered" >
 						<tr>
 							<td>글번호</td>
-							<td th:text="${board.bno}" />
+							<td th:text="${board.bno}" id="bno" />
 							<td>작성자</td>
 							<td th:text="${board.mid}" />
 						</tr>
@@ -43,10 +118,35 @@
 						</tr>
 					</table>
 				</div>
-				
-				<a th:href="@{update(no=${board.bno}, id=${#authentication.name})}" th:text="수정" /> 
-				<a th:href="@{delete(no=${board.bno}, id=${#authentication.name})}" th:text="삭제" /> 
-				<a th:href="@{list}" th:text="리스트" />
+			</div>
+			<div class="card-body" sec:authorize="isAuthenticated()">
+				<div class="input-group mb-3">
+				  <input type="text" id="replyInput" class="form-control" placeholder="댓글을 써주세요.">
+				  <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="insertReply();">작성</button>
+				</div>
+			</div>
+			<div class="card-body">
+				<table class="table table-bordered reply">
+					<tr>
+						<td>댓글 번호</td>
+						<td>댓글</td>
+						<td>작성자</td>
+						<td>작성일</td>
+						<td>삭제</td>
+					</tr>
+					<tr th:if="${#lists.isEmpty(replylist)}">
+						<td colspan="5" align="center">작성된 댓글이 없습니다. </td>
+					</tr>
+					<tr th:unless="${#lists.isEmpty(replylist)}"
+					    th:each="reply : ${replylist}" class="replylistp">	
+						<td th:text="${reply.rno}" class="replylist"></td>
+						<td th:text="${reply.rcontent}" class="replylist"></td>
+						<td th:text="${reply.mid}" class="replylist"> </td>
+						<td th:text="${#calendars.format(reply.rdate, 'yyyy-MM-dd')}" class="replylist"></td>
+						<td th:if="${#authentication.name == reply.mid}"><input type="button" class="btn btn-danger" th:onclick="'deleteReply('+ ${reply.rno} +')'" value="삭제"></button></td>
+						<td th:unless="${#authentication.name == reply.mid}"><input type="hidden" class="btn btn-danger" th:onclick="'deleteReply('+ ${reply.rno} +')'" value="삭제"></button></td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
