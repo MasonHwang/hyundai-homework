@@ -20,11 +20,11 @@
         <div class="card-body">
             <div class="row">
             	<div class="col-4">아이디  </div>
-            	<div class="col-8" th:text="${username}">  </div>
+            	<div class="col-8" sec:authentication="name"> </div>
             </div>
             <div class="row">
             	<div class="col-4">이름 </div>
-            	<div class="col-8" sec:authentication="name"> </div>
+            	<div class="col-8" th:text="${username}">  </div>
             </div>
             <div class="row">
             	<div class="col-4">권한 </div>
@@ -36,31 +36,56 @@
             </div>
         </div>
     </div>
-    <div class="card shadow mb-4" style=" height: auto; width: 1000px; ">
-		    
-        	<div class="card-body">
-		            <div class="table-responsive">
-					<table class="table table-bordered" >
-						<tr>
-							<th>글번호</th>
-							<th>제목</th>
-							<th>작성일자</th>
-							<th>조회수</th>
-						</tr>
-						<tr th:if="${#lists.isEmpty(boardlist)}">
-							<td colspan="4" align="center">작성된 글이 없습니다. </td>
-						</tr>
-						<tr th:unless="${#lists.isEmpty(boardlist)}" th:each="board: ${boardlist}">
-							<td th:text="${board.bno}" />
-							<td><a th:href="@{/board/detail(no=${board.bno})}" th:text="${board.btitle}"></a></td>	
-							<td th:text="${#calendars.format(board.bdate, 'yyyy-MM-dd')}" />
-							<td th:text="${board.bhitcount}" />
-						</tr>
-					</table>
-				</div>
-				
-			</div>
-		</div>
+    <div class="card shadow mb-4" style=" height: auto; width: 1000px; ">	
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">등록된 글</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th style="width:10%;">글번호</th>
+                            <th style="width:45%;">제목</th>
+                            <th style="width:20%;">작성일자</th>
+                            <th style="width:15%;">작성자</th>
+                            <th style="width:10%;">조회수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="board : ${list}">
+                        <tr class="tBody" th:object="${board}">
+                            <td class="bno" th:text="*{bno}"></td>
+                            <td class="btitle"><a th:href="@{/board/detail(no=*{bno})}" th:text="*{btitle}"></a></td>
+                            <td class="bdate" th:text="*{bdate}"></td>
+                            <td class="mid" th:text="*{mid}"></td>
+                            <td class="bhitcount" th:text="*{bhitcount}"></td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+                <div th:object="${pageMaker}">
+                    <div class="page-item" style="text-align: center">
+                        <a class="page-item" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                        <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                            <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
+                            <a class="page-item" th:unless="${pageMaker.criteria.getPageNum() == num}" th:href="@{/member/mypage(pageNum=${num})}"><code th:text="${num}"></code></a>
+                        </th:block>
+                        <a class="page-item" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                    </div>
+                    <div class="small-width" style="text-align: center">
+                        <a class="page-item" th:if="*{criteria.pageNum > 1}" th:href="@{/member/mypage(pageNum=${criteria.pageNum - 1})}"><code>&lt;</code></a>
+                        <code th:text="*{criteria.pageNum}"></code>
+                        <a class="page-item" th:if="*{criteria.pageNum < realEnd}" th:href="@{/member/mypage(pageNum=${criteria.pageNum + 1})}"><code>&gt;</code></a>
+                    </div>
+                    <form action="/member/board" th:object="${criteria}" name="pageForm">
+                        <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                        <input type="hidden" name="amount" th:field="*{amount}">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

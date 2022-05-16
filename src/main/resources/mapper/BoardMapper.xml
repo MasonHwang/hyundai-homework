@@ -18,7 +18,6 @@
 		UPDATE BOARD
 		   SET BTITLE = #{btitle},
 		       BCONTENT = #{bcontent},
-		       BDATE = SYSDATE,
 		       IID = #{iid}
 		 WHERE BNO = #{bno}
 		   AND MID = #{mid}
@@ -43,6 +42,51 @@
 		 WHERE MID = #{mid}
 		 ORDER BY BDATE DESC
  	</select>
+ 	
+ 	<!-- 황명하 실습 -->	
+ 	<select id= "getBoard" resultType="com.hyundai.board.domain.BoardVO">
+ 		 <![CDATA[
+ 		 SELECT BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID
+		 FROM (
+		 	SELECT ROWNUM R, BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID
+		 	FROM (
+		 		SELECT * FROM BOARD ORDER BY BDATE DESC, BNO DESC
+		 	)
+		 	WHERE ROWNUM <= #{pageNum} * #{amount}
+		 )
+		 WHERE R> (#{pageNum}-1) * #{amount}
+		 ]]>
+ 	</select>
+ 	
+ 	
+ 	<select id= "getMemberBoard" resultType="com.hyundai.board.domain.BoardVO">
+ 		 <![CDATA[
+ 		 SELECT BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID
+		 FROM (
+		 	SELECT ROWNUM R, BNO, BTITLE, BCONTENT, BDATE, MID, BHITCOUNT, IID
+		 	FROM (
+		 		SELECT * FROM BOARD WHERE MID = #{mid} ORDER BY BDATE DESC, BNO DESC
+		 	)
+		 	WHERE ROWNUM <= #{cri.pageNum} * #{cri.amount}
+		 )
+		 WHERE R> (#{cri.pageNum}-1) * #{cri.amount}
+		 ]]>
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="getTotal" resultType="int">
+ 		SELECT COUNT(*)
+		  FROM BOARD
+ 	</select>
+ 	
+ 	<select id="getMemberTotal" resultType="int">
+ 		SELECT COUNT(*)
+		  FROM BOARD
+		  WHERE MID = #{mid}
+ 	</select> 	
+ 	
+ 	
 </mapper>
  
  

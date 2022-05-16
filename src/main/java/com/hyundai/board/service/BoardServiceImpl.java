@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hyundai.board.domain.BoardVO;
+import com.hyundai.board.domain.Criteria;
 import com.hyundai.board.mapper.BoardMapper;
 
 @Service
@@ -86,6 +87,34 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> selectMemberBoard(BoardVO boardVO) {
 		// TODO Auto-generated method stub
 		return boardMapper.selectMemberBoard(boardVO);
+	}
+
+
+	@Override
+	public List<BoardVO> getBoard(Criteria cri) {
+		// TODO Auto-generated method stub
+		return boardMapper.getBoard(cri);
+	}
+
+
+	@Override
+	public List<BoardVO> getMemberBoard(Criteria cri, String mid) {
+		// TODO Auto-generated method stub
+		return boardMapper.getMemberBoard(cri, mid);
+	}
+
+
+	@Override
+	public int getMemberTotal(String mid) {
+		// TODO Auto-generated method stub
+		return boardMapper.getMemberTotal(mid);
+	}
+
+
+	@Override
+	public int getTotal() {
+		// TODO Auto-generated method stub
+		return boardMapper.getTotal();
 	}
 	
 	

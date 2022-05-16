@@ -3,6 +3,7 @@ package com.hyundai.board.service;
 import java.util.List;
 
 import com.hyundai.board.domain.BoardVO;
+import com.hyundai.board.domain.Criteria;
 
 public interface BoardService {
 	
@@ -19,4 +20,12 @@ public interface BoardService {
 	int updateBoard(BoardVO boardVO);
 	
 	List<BoardVO> selectMemberBoard(BoardVO boardVO);
+	
+	List<BoardVO> getBoard(Criteria cri);
+
+	List<BoardVO> getMemberBoard(Criteria cri, String mid);
+	
+	int getTotal();
+
+	int getMemberTotal(String mid);
 }

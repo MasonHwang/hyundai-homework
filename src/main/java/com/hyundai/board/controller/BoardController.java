@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hyundai.board.domain.BoardVO;
+import com.hyundai.board.domain.Criteria;
+import com.hyundai.board.domain.PageVO;
 import com.hyundai.board.service.BoardService;
 
 @Controller
@@ -22,11 +24,22 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+//	@RequestMapping(value="/list", method = RequestMethod.GET)
+//	public String boardlist(Model model)throws Exception {
+//		try {
+//			List<BoardVO> list = boardService.selectAllBoard();
+//			model.addAttribute("list", list);
+//			return "boardlist";
+//		}catch(Exception e) {
+//			throw e;
+//		}
+//	}
+	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public String boardlist(Model model)throws Exception {
+	public String boardlist(Criteria criteria, Model model)throws Exception {
 		try {
-			List<BoardVO> list = boardService.selectAllBoard();
-			model.addAttribute("list", list);
+			model.addAttribute("list", boardService.getBoard(criteria));
+			model.addAttribute("pageMaker", new PageVO(boardService.getTotal(), 10, criteria));
 			return "boardlist";
 		}catch(Exception e) {
 			throw e;

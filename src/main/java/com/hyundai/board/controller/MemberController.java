@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hyundai.board.domain.BoardVO;
+import com.hyundai.board.domain.Criteria;
 import com.hyundai.board.domain.MemberRole;
 import com.hyundai.board.domain.MemberUserDetails;
 import com.hyundai.board.domain.MemberVO;
+import com.hyundai.board.domain.PageVO;
 import com.hyundai.board.service.BoardService;
 import com.hyundai.board.service.MemberService;
 
@@ -54,21 +56,23 @@ public class MemberController {
 	
 	//고석준작성 
 	@RequestMapping(value="/mypage")
-	public String mypage(@AuthenticationPrincipal MemberUserDetails memberUserDetails,
+	public String mypage(Criteria criteria, @AuthenticationPrincipal MemberUserDetails memberUserDetails,
 			Model model) {
+		String mid = memberUserDetails.getMemail();
+		System.out.println("사용자 아이디 : " + mid);
 		
-		System.out.println("사용자 이름 : " + memberUserDetails.getMname());
+		model.addAttribute("username", memberUserDetails.getMname());		
 		
-		model.addAttribute("username", memberUserDetails.getMemail());
-		
-		BoardVO boardVO = new BoardVO();
-		boardVO.setMid( memberUserDetails.getMemail());
-		
-		List<BoardVO> boardList = boardService.selectMemberBoard(boardVO);
-		model.addAttribute("boardlist", boardList);
-		
-		
+		model.addAttribute("list", boardService.getMemberBoard(criteria, mid));
+		model.addAttribute("pageMaker", new PageVO(boardService.getMemberTotal(mid), 10, criteria));
 		return "mypage";
+	}
+	
+	@RequestMapping("/board")
+	public String memberList(Criteria criteria, @AuthenticationPrincipal MemberUserDetails memberUserDetails, Model model) {
+//		model.addAttribute("list", boardService.getMemberBoard(criteria));
+//		model.addAttribute("pageMaker", new PageVO(boardService.getTotal(), 10, criteria));
+		return "list";
 	}
 	
 	
