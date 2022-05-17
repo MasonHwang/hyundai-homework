@@ -31,7 +31,6 @@ public class MemberUserDetailsService implements UserDetailsService{
 		// TODO Auto-generated method stub
 		MemberVO result = null;
 		
-		System.out.println("loadUserByUsername called : " + username);
 		MemberVO vo = new MemberVO();
 	
 		vo.setMid(username);

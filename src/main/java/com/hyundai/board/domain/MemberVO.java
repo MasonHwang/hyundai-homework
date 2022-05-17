@@ -5,7 +5,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * @author 		: 고석준
+ * @author 		: 고석준, 황명하(pair programming)
  * @fileName 	: MemberVO.java
  * @date 		: 2022. 5. 13.
  * @description : 멤버 VO

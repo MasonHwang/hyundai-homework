@@ -45,7 +45,6 @@ public class MemberOAuth2UserDetailsService
 		MemberVO result = membermapper.selectMember(vo);
 		
 		if(result != null) {
-			System.out.println("기존회원");
 			return result;
 		}
 		
@@ -65,15 +64,12 @@ public class MemberOAuth2UserDetailsService
    @Override
    public OAuth2User loadUser(OAuth2UserRequest userRequest)
            throws OAuth2AuthenticationException {
-       System.out.println("-----loaduser---------------");
-       System.out.println("userRequest" + userRequest);
        
        String clientName = userRequest.getClientRegistration()
                .getClientName();
       
        //사용자 정보 가져오기 구글에서 허용한 API 범위
        OAuth2User oAuth2User = super.loadUser(userRequest);
-       System.out.println("=====================");
        oAuth2User.getAttributes().forEach( ( k , v ) ->{
     	   System.out.println(k + " : " + v);
        });//end foreach

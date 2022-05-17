@@ -34,14 +34,10 @@ public class ReplyRESTController {
 	public ResponseEntity<List<ReplyVO>> insertReply(@RequestBody ReplyVO replyVO,
 			@AuthenticationPrincipal MemberUserDetails memberUserDetails){
 		replyVO.setMid(memberUserDetails.getMemail());
-		System.out.println("Called insertReply @@@@@@@@@@2");
-		System.out.println(replyVO);
 		int rows = replyService.insertReply(replyVO);
 		if(rows != 1) {
-			System.out.println("reply inser error !!!!!!!1");
 			return new ResponseEntity<>(null, HttpStatus.BAD_GATEWAY);
 		}
-		System.out.println("reply inser Good !!!!!!!1");
 		
 		BoardVO boardVO = new BoardVO();
 		boardVO.setBno(replyVO.getBno());
@@ -53,13 +49,10 @@ public class ReplyRESTController {
 	public ResponseEntity<String> deleteReply(@RequestBody ReplyVO replyVO,
 			@AuthenticationPrincipal MemberUserDetails memberUserDetails){
 		replyVO.setMid(memberUserDetails.getMemail());
-		System.out.println(replyVO);
 		int rows = replyService.deleteReply(replyVO);
 		if(rows != 1) {
-			System.out.println("reply delete error !!!!!!!1");
 			return new ResponseEntity<>("FAILURE", HttpStatus.BAD_GATEWAY);
 		}
-		System.out.println("reply delete success !!!!!!!1");
 		return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 	}
 	
@@ -67,13 +60,10 @@ public class ReplyRESTController {
 	public ResponseEntity<String> updateReply(@RequestBody ReplyVO replyVO,
 			@AuthenticationPrincipal MemberUserDetails memberUserDetails){
 		replyVO.setMid(memberUserDetails.getMemail());
-		System.out.println(replyVO);
 		int rows = replyService.updateReply(replyVO);
 		if(rows != 1) {
-			System.out.println("reply update error !!!!!!!1");
 			return new ResponseEntity<>("FAILURE", HttpStatus.BAD_GATEWAY);
 		}
-		System.out.println("reply update success !!!!!!!1");
 		return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 	}
 

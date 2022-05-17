@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author 		: 고석준
+ * @author 		: 고석준, 황명하(pair programming)
  * @fileName 	: MemberUserDetails.java
  * @date 		: 2022. 5. 14.
  * @description : Spring Security에서 사용자의 정보를 담는 인터페이스
